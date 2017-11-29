@@ -9,7 +9,7 @@ import com.beust.testng.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class GetTestUsingCountryAndStates {
+public class GETTestUsingCountryAndStates {
 	/*
 	 * given()
 	 * 
