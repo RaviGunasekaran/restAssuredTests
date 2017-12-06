@@ -3,12 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.country.employee.POST.POST_CREATE">
+      <class name="com.rest.employee.DELETE.DeleteByID">
         <methods>
-          <include name="createNewEmployee"/>
           <include name="setDataForTest"/>
+          <include name="deleteEmployee"/>
         </methods>
-      </class> <!-- com.country.employee.POST.POST_CREATE -->
+      </class> <!-- com.rest.employee.DELETE.DeleteByID -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -1,8 +1,6 @@
-package com.country.employee.POST;
+package com.rest.employee.POST;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -10,13 +8,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 
 public class POST_CREATE {
 
@@ -53,27 +47,56 @@ public class POST_CREATE {
 				.get("employee/dummy")
 				.then()
 				.statusCode(200);
-		System.out.println("Status Code == 200");		
+		System.out.println("Status Code == 200 == GET == Dummy Employee Created == SUCCESS");		
 	}
 	
-	//Generate String from Given Json File
+	//Generate String from Given JSON File
 	public String generateStringFromJSON(String path) throws IOException {
 	    return new String(Files.readAllBytes(Paths.get(path)));
 	}
 	
+	// Create New Employee using JSON Payload from file & POST
+	
 	@Test
 	public void createNewEmployee() throws IOException{
 		// Prepare path of the file
-		String postJsonFilePath = System.getProperty("user.dir")+"/src/test/java/com/country/employee/POST/employee1.json";
-		// Get file content into JSON
-		String json = generateStringFromJSON(postJsonFilePath);
-		// Use JSON for POST Request
+		String postJsonFilePath;
+		String json;
+		postJsonFilePath= System.getProperty("user.dir")+"/src/test/java/com/rest/employee/POST/employee1.json";
+		// Get Employee1 content into JSON
+		json = generateStringFromJSON(postJsonFilePath);
+		// Use Employee1-JSON for POST Request
 		Response newEmployee = RestAssured.given()
 		.contentType(ContentType.JSON)
 		.when()
 		.body(json)
 		.post("/employee/create");
-		System.out.println("New Employee Created : "+newEmployee.prettyPrint());
+		System.out.println("Status Code == 200 == POST == Employee1 Created == SUCCESS"+newEmployee.prettyPrint());		
+
+		//EMPLOYEE2 creation with Status Code Verification
+		
+		// Prepare path of the file
+		postJsonFilePath= System.getProperty("user.dir")+"/src/test/java/com/rest/employee/POST/employee2.json";
+		
+		// Get Employee2 content into JSON
+		json = generateStringFromJSON(postJsonFilePath);
+
+		// Use Employee1-JSON for POST Request & Get status
+		int status = RestAssured.given()
+		.contentType(ContentType.JSON)
+		.when()
+		.body(json)
+		.post("/employee/create")
+		.statusCode();
+		
+		// Print status Code 
+		System.out.println("POST Request statusCode === "+status);
+		
+		// Validate Status Code after POST
+		Assert.assertEquals(status, 200);
+		System.out.println("Status Code == 200 == POST == Employee2 Created == SUCCESS");		
+		
 	}
+	
 
 }
