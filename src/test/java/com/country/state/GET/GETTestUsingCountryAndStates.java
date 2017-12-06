@@ -1,4 +1,4 @@
-package com.country.state;
+package com.country.state.GET;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;

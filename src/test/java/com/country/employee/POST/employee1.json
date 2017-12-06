@@ -1,0 +1,13 @@
+{
+	"employeeFirstName": "TESTER_EMPLOYEE1",
+	"employeeLastName": "API_LASTNAME",
+	"departmentName": "Information Technology",
+	"empAddress": "ANY WHERE",
+	"salary": 1000,
+	"contactNumbers": [
+		1234,
+		5432
+	],
+	"createdDate": null,
+	"id": 1
+}
